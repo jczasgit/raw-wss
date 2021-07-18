@@ -33,8 +33,8 @@ Default `opts`:<br>
 {
     server: http.Server,    // server to listen upgrade event
     secure: boolean,        // use https
-    cert: string | Buffer   // public key
-    key: string | Buffer    // private key
+    cert: string | Buffer,  // public key
+    key: string | Buffer,   // private key
     verbose: boolean,       // log internal WSS events
 }
 ```
