@@ -51,21 +51,21 @@ Example only using raw-wss:
 ```javascript
 import WSS from "raw-wss";
 const wss = new WSS(); // auto creates a http server
-wss.on(WSS.WSS_EVENTS.CONNECTION, (socket) => {
+wss.on("connection", (socket) => {
     // new connection
     socket.write(data);
 });
 
-wss.on(WSS.WSS_EVENTS.DISCONNECT, (reason) => {
+wss.on("disconnect", (reason) => {
     // connection closed
 });
 
-wss.on(WSS.WSS_EVENTS.DATA, (socket, buffer) => {
+wss.on("data", (socket, buffer) => {
     // raw data from socket.
     // handle data...
 });
 
-wss.on(WSS.WSS_EVENTS.REQUEST, (req, res) => {
+wss.on("request", (req, res) => {
     // handle normal http requests...
 });
 
@@ -87,15 +87,15 @@ app.get("/", (req, res) => res.send("express app test with websocket"));
 
 const wss = new WSS({ server });
 
-wss.on(WSS.WSS_EVENTS.CONNECTION, (socket) => {
-    console.log("new connection: " + socket.id);
+wss.on("connection", (socket) => {
+    console.log("new connection: " + socket["id"]);
 });
 
-wss.on(WSS.WSS_EVENTS.DISCONNECT, (reason) => {
+wss.on("disconnect", (reason) => {
     console.log("socket disconnect: " + reason);
 });
 
-wss.on(WSS.WSS_EVENTS.DATA, (socket, buffer) => {
+wss.on("data", (socket, buffer) => {
     console.log(buffer);
 });
 
@@ -116,20 +116,20 @@ const wss = new WSS({
     key: "private key",
 });
 
-wss.on(WSS.WSS_EVENTS.CONNECTION, (socket) => {
-    console.log("new secure connection: " + socket.id);
+wss.on("connection", (socket) => {
+    console.log("new secure connection: " + socket["id"]);
 });
 
-wss.on(WSS.WSS_EVENTS.DATA, (socket, buffer) => {
+wss.on("data", (socket, buffer) => {
     console.log("data received through secure channel");
     console.log(buffer);
 });
 
-wss.on(WSS.WSS_EVENTS.DISCONNECT, (reason) => {
+wss.on("disconnect", (reason) => {
     console.log("socket disconnect: " + reason);
 });
 
-wss.on(WSS.WSS_EVENTS.REQUEST, (req, res) => {
+wss.on("request", (req, res) => {
     res.write("Testing secure Websocket channel");
     res.end();
 });

@@ -90,7 +90,7 @@ class Websocket extends events_1.EventEmitter {
         socket.once("close", this._onClose.bind(this, socket["id"]));
         socket.once("error", this._onError.bind(this, socket["id"]));
         socket.once("end", this._onEnd.bind(this, socket["id"]));
-        this.emit(Websocket.WSS_EVENTS.CONNECTION, socket);
+        this.emit("connection", socket);
     }
     _onEnd(id) {
         if (this._verbose)
@@ -115,7 +115,7 @@ class Websocket extends events_1.EventEmitter {
     _onData(socket, buffer) {
         let parsed = this._parseData(buffer, socket);
         if (parsed)
-            this.emit(Websocket.WSS_EVENTS.DATA, socket, parsed);
+            this.emit("data", socket, parsed);
     }
     _cleanUp(id) {
         if (this.sockets.has(id)) {
@@ -165,7 +165,7 @@ class Websocket extends events_1.EventEmitter {
         let opCode = firstByte & 0xf;
         // 0x8 = connection close
         if (opCode === 0x8) {
-            this.emit(Websocket.WSS_EVENTS.DISCONNECT, "Connection closed");
+            this.emit("disconnect", "Connection closed");
             socket.end();
             return;
         }
@@ -278,7 +278,16 @@ class Websocket extends events_1.EventEmitter {
             .digest("base64");
     }
     _onRequest(req, res) {
-        this.emit(Websocket.WSS_EVENTS.REQUEST, req, res);
+        this.emit("request", req, res);
+    }
+    on(event, listener) {
+        return super.on(event, listener);
+    }
+    once(event, listener) {
+        return super.on(event, listener);
+    }
+    emit(event, ...args) {
+        return super.emit(event, ...args);
     }
 }
 exports.default = Websocket;

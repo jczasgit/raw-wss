@@ -10,15 +10,15 @@ app.get("/", (req, res) => res.send("express app test with websocket"));
 
 const wss = new Websocket({ server });
 
-wss.on(Websocket.WSS_EVENTS.CONNECTION, (socket) => {
-    console.log("new connection: " + socket.id);
+wss.on("connection", (socket) => {
+    console.log("new connection: " + socket["id"]);
 });
 
-wss.on(Websocket.WSS_EVENTS.DISCONNECT, (reason) => {
+wss.on("disconnect", (reason) => {
     console.log("socket disconnect: " + reason);
 });
 
-wss.on(Websocket.WSS_EVENTS.DATA, (socket, buffer) => {
+wss.on("data", (socket, buffer) => {
     console.log(buffer);
 });
 

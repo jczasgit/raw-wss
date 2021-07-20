@@ -45,4 +45,16 @@ export default class Websocket extends EventEmitter {
     protected _constructData(data: Buffer): Buffer;
     protected _generateAcceptKey(key: string): string;
     protected _onRequest(req: IncomingMessage, res: ServerResponse): void;
+    on(event: "connection", listener: (socket: Duplex) => void): this;
+    on(event: "data", listener: (socket: Duplex, data: Buffer) => void): this;
+    on(event: "request", listener: (req: IncomingMessage, res: ServerResponse) => void): this;
+    on(event: "disconnect", listener: (reason: string) => void): this;
+    once(event: "connection", listener: (socket: Duplex) => void): this;
+    once(event: "data", listener: (socket: Duplex, data: Buffer) => void): this;
+    once(event: "request", listener: (req: IncomingMessage, res: ServerResponse) => void): this;
+    once(event: "disconnect", listener: (reason: string) => void): this;
+    emit(event: "connection", socket: Duplex): boolean;
+    emit(event: "data", socket: Duplex, data: Buffer): boolean;
+    emit(event: "request", req: IncomingMessage, res: ServerResponse): boolean;
+    emit(event: "disconnect", reason: string): boolean;
 }

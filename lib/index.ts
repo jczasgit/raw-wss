@@ -120,7 +120,7 @@ export default class Websocket extends EventEmitter {
         socket.once("error", this._onError.bind(this, socket["id"]));
         socket.once("end", this._onEnd.bind(this, socket["id"]));
 
-        this.emit(Websocket.WSS_EVENTS.CONNECTION, socket);
+        this.emit("connection", socket);
     }
 
     protected _onEnd(id: string) {
@@ -146,7 +146,7 @@ export default class Websocket extends EventEmitter {
 
     protected _onData(socket: Duplex, buffer: Buffer) {
         let parsed = this._parseData(buffer, socket);
-        if (parsed) this.emit(Websocket.WSS_EVENTS.DATA, socket, parsed);
+        if (parsed) this.emit("data", socket, parsed);
     }
 
     protected _cleanUp(id: string) {
@@ -203,7 +203,7 @@ export default class Websocket extends EventEmitter {
 
         // 0x8 = connection close
         if (opCode === 0x8) {
-            this.emit(Websocket.WSS_EVENTS.DISCONNECT, "Connection closed");
+            this.emit("disconnect", "Connection closed");
             socket.end();
             return;
         }
@@ -338,6 +338,32 @@ export default class Websocket extends EventEmitter {
     }
 
     protected _onRequest(req: IncomingMessage, res: ServerResponse) {
-        this.emit(Websocket.WSS_EVENTS.REQUEST, req, res);
+        this.emit("request", req, res);
+    }
+
+    on(event: "connection", listener: (socket: Duplex) => void): this;
+    on(event: "data", listener: (socket: Duplex, data: Buffer) => void): this;
+    // prettier-ignore
+    on(event: "request", listener: (req: IncomingMessage, res: ServerResponse) => void): this;
+    on(event: "disconnect", listener: (reason: string) => void): this;
+    on(event: string | symbol, listener: (...args: any[]) => void): this {
+        return super.on(event, listener);
+    }
+
+    once(event: "connection", listener: (socket: Duplex) => void): this;
+    once(event: "data", listener: (socket: Duplex, data: Buffer) => void): this;
+    // prettier-ignore
+    once(event: "request", listener: (req: IncomingMessage, res: ServerResponse) => void): this;
+    once(event: "disconnect", listener: (reason: string) => void): this;
+    once(event: string | symbol, listener: (...args: any[]) => void): this {
+        return super.on(event, listener);
+    }
+
+    emit(event: "connection", socket: Duplex): boolean;
+    emit(event: "data", socket: Duplex, data: Buffer): boolean;
+    emit(event: "request", req: IncomingMessage, res: ServerResponse): boolean;
+    emit(event: "disconnect", reason: string): boolean;
+    emit(event: string | symbol, ...args: any[]): boolean {
+        return super.emit(event, ...args);
     }
 }

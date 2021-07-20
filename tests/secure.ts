@@ -2,20 +2,20 @@ import Websocket from "../lib";
 
 const wss = new Websocket({ secure: true });
 
-wss.on(Websocket.WSS_EVENTS.CONNECTION, (socket) => {
-    console.log("new secure connection: " + socket.id);
+wss.on("connection", (socket) => {
+    console.log("new secure connection: " + socket["id"]);
 });
 
-wss.on(Websocket.WSS_EVENTS.DATA, (socket, buffer) => {
+wss.on("data", (socket, buffer) => {
     console.log("data received through secure channel");
     console.log(buffer);
 });
 
-wss.on(Websocket.WSS_EVENTS.DISCONNECT, (reason) => {
+wss.on("disconnect", (reason) => {
     console.log("socket disconnect: " + reason);
 });
 
-wss.on(Websocket.WSS_EVENTS.REQUEST, (req, res) => {
+wss.on("request", (req, res) => {
     res.write("Testing secure Websocket channel");
     res.end();
 });
