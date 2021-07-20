@@ -49,12 +49,15 @@ export default class Websocket extends EventEmitter {
     on(event: "data", listener: (socket: Duplex, data: Buffer) => void): this;
     on(event: "request", listener: (req: IncomingMessage, res: ServerResponse) => void): this;
     on(event: "disconnect", listener: (reason: string) => void): this;
+    on(event: string | symbol, listener: (...args: any[]) => void): this;
     once(event: "connection", listener: (socket: Duplex) => void): this;
     once(event: "data", listener: (socket: Duplex, data: Buffer) => void): this;
     once(event: "request", listener: (req: IncomingMessage, res: ServerResponse) => void): this;
     once(event: "disconnect", listener: (reason: string) => void): this;
+    once(event: string | symbol, listener: (...args: any[]) => void): this;
     emit(event: "connection", socket: Duplex): boolean;
     emit(event: "data", socket: Duplex, data: Buffer): boolean;
     emit(event: "request", req: IncomingMessage, res: ServerResponse): boolean;
     emit(event: "disconnect", reason: string): boolean;
+    emit(event: string | symbol, ...args: any[]): boolean;
 }

@@ -1,6 +1,6 @@
 {
     "name": "raw-wss",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "simple websocket server",
     "main": "./dist/index.js",
     "scripts": {

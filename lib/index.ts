@@ -346,6 +346,7 @@ export default class Websocket extends EventEmitter {
     // prettier-ignore
     on(event: "request", listener: (req: IncomingMessage, res: ServerResponse) => void): this;
     on(event: "disconnect", listener: (reason: string) => void): this;
+    on(event: string | symbol, listener: (...args: any[]) => void): this;
     on(event: string | symbol, listener: (...args: any[]) => void): this {
         return super.on(event, listener);
     }
@@ -355,6 +356,7 @@ export default class Websocket extends EventEmitter {
     // prettier-ignore
     once(event: "request", listener: (req: IncomingMessage, res: ServerResponse) => void): this;
     once(event: "disconnect", listener: (reason: string) => void): this;
+    once(event: string | symbol, listener: (...args: any[]) => void): this;
     once(event: string | symbol, listener: (...args: any[]) => void): this {
         return super.on(event, listener);
     }
@@ -363,6 +365,7 @@ export default class Websocket extends EventEmitter {
     emit(event: "data", socket: Duplex, data: Buffer): boolean;
     emit(event: "request", req: IncomingMessage, res: ServerResponse): boolean;
     emit(event: "disconnect", reason: string): boolean;
+    emit(event: string | symbol, ...args: any[]): boolean;
     emit(event: string | symbol, ...args: any[]): boolean {
         return super.emit(event, ...args);
     }
