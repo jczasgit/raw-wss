@@ -1,5 +1,5 @@
 import express from "express";
-import Websocket from "../lib";
+import { Websocket } from "../lib";
 import http from "http";
 
 const app = express();

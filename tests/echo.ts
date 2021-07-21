@@ -1,4 +1,4 @@
-import Websocket from "../lib";
+import { Websocket } from "../lib";
 
 const ws = new Websocket({
     verbose: true,
@@ -10,7 +10,7 @@ ws.on("connection", (socket) => {
 });
 
 ws.on("data", (socket, buffer) => {
-    console.log(buffer); // log out raw buffer
+    console.log(buffer.toString()); // log out raw buffer
     ws.send(socket, buffer); // echo data to client
 });
 
