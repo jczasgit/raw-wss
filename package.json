@@ -1,6 +1,6 @@
 {
     "name": "raw-wss",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "simple websocket server",
     "main": "./dist/index.js",
     "scripts": {
@@ -19,16 +19,16 @@
         "server",
         "raw"
     ],
-    "author": "Juan Carlos <jczaw@sina.com> (https://juancwu.com/)",
+    "author": "Juan Carlos (https://juancwu.com/)",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/jczasgit/raw-wss.git"
+        "url": "https://github.com/juancwu/raw-wss.git"
     },
     "bugs": {
-        "url": "https://github.com/jczasgit/raw-wss/issues"
+        "url": "https://github.com/juancwu/raw-wss/issues"
     },
-    "homepage": "https://github.com/jczasgit/raw-wss#readme",
+    "homepage": "https://github.com/juancwu/raw-wss#readme",
     "devDependencies": {
         "@types/debug": "^4.1.6",
         "@types/express": "^4.17.13",
